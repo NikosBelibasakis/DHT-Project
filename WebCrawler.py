@@ -303,7 +303,7 @@ async def main():
             else:
                 a_tag_text = None
 
-        del href_obj[689:]   #delete the hrefs that don't refer to computer scientists
+        del href_obj[690:]   #delete the hrefs that don't refer to computer scientists
 
         #we store the links of the computer scientists' pages in the "links" list
         links = ["https://en.wikipedia.org" + str(h) for h in href_obj]
@@ -314,66 +314,66 @@ async def main():
 
         scientist_info_list = await asyncio.gather(*tasks)
 
-        #Changing some elements in the surname list, because some surnames have peculiarities
-        scientist_info_list[24]['surname'] = 'Bachman'
-        scientist_info_list[26]['surname'] = 'Backus'
-        scientist_info_list[33]['surname'] = 'Bauer'
-        scientist_info_list[44]['surname'] = 'Blaauw'
-        scientist_info_list[62]['surname'] = 'Bourne'
-        scientist_info_list[63]['surname'] = 'Bouwman'
-        scientist_info_list[71]['surname'] = 'Brinch Hansen'
-        scientist_info_list[73]['surname'] = 'Brooks'
-        scientist_info_list[77]['surname'] = 'Caballero Gil'
-        scientist_info_list[84]['surname'] = 'Carmack'
-        scientist_info_list[96]['surname'] = 'Clarke'
-        scientist_info_list[98]['surname'] = 'Codd'
-        scientist_info_list[110]['surname'] = 'Corbató'
-        scientist_info_list[142]['surname'] = 'Dix'
-        scientist_info_list[146]['surname'] = 'Draper'
-        scientist_info_list[154]['surname'] = 'Eckert'
-        scientist_info_list[158]['surname'] = 'Emerson'
-        scientist_info_list[181]['surname'] = 'Ford' #Ford Jr. 
-        scientist_info_list[180]['surname'] = 'Forbus'
-        scientist_info_list[201]['surname'] = 'Gates'
-        scientist_info_list[204]['surname'] = 'Geschke'
-        scientist_info_list[257]['surname'] = 'Hehner'
-        scientist_info_list[288]['surname'] = 'Ingalls'
-        scientist_info_list[335]['surname'] = 'Kruskal'
-        scientist_info_list[405]['surname'] = 'Moore'
-        scientist_info_list[475]['surname'] = 'Pieraccini'
-        scientist_info_list[511]['surname'] = 'Royce'
-        scientist_info_list[568]['surname'] = 'Steele'
+        # Changing some elements in the surname list, because some surnames have peculiarities
+        scientist_info_list[25]['surname'] = 'Bachman'
+        scientist_info_list[27]['surname'] = 'Backus'
+        scientist_info_list[34]['surname'] = 'Bauer'
+        scientist_info_list[45]['surname'] = 'Blaauw'
+        scientist_info_list[63]['surname'] = 'Bourne'
+        scientist_info_list[64]['surname'] = 'Bouwman'
+        scientist_info_list[72]['surname'] = 'Brinch Hansen'
+        scientist_info_list[74]['surname'] = 'Brooks'
+        scientist_info_list[78]['surname'] = 'Caballero Gil'
+        scientist_info_list[85]['surname'] = 'Carmack'
+        scientist_info_list[97]['surname'] = 'Clarke'
+        scientist_info_list[99]['surname'] = 'Codd'
+        scientist_info_list[111]['surname'] = 'Corbató'
+        scientist_info_list[144]['surname'] = 'Dix'
+        scientist_info_list[148]['surname'] = 'Draper'
+        scientist_info_list[156]['surname'] = 'Eckert'
+        scientist_info_list[160]['surname'] = 'Emerson'
+        scientist_info_list[183]['surname'] = 'Ford'  # Ford Jr.
+        scientist_info_list[182]['surname'] = 'Forbus'
+        scientist_info_list[203]['surname'] = 'Gates'
+        scientist_info_list[206]['surname'] = 'Geschke'
+        scientist_info_list[259]['surname'] = 'Hehner'
+        scientist_info_list[290]['surname'] = 'Ingalls'
+        scientist_info_list[337]['surname'] = 'Kruskal'
+        scientist_info_list[407]['surname'] = 'Moore'
+        scientist_info_list[477]['surname'] = 'Pieraccini'
+        scientist_info_list[513]['surname'] = 'Royce'
+        scientist_info_list[570]['surname'] = 'Steele'
 
-         #Setting the number of awards for some scientists, because we could not fetch the number from their wikipedia page with the web crawler
 
-        scientist_info_list[50]['awards'] = 12
-        scientist_info_list[58]['awards'] = 8
-        scientist_info_list[92]['awards'] = 7
-        scientist_info_list[145]['awards'] = 5
-        scientist_info_list[191]['awards'] = 9
-        scientist_info_list[238]['awards'] = 2
-        scientist_info_list[268]['awards'] = 7
-        scientist_info_list[286]['awards'] = 3
-        scientist_info_list[313]['awards'] = 6
-        scientist_info_list[370]['awards'] = 2
-        scientist_info_list[387]['awards'] = 3
-        scientist_info_list[393]['awards'] = 10
-        scientist_info_list[400]['awards'] = 7
-        scientist_info_list[422]['awards'] = 2
-        scientist_info_list[434]['awards'] = 1
-        scientist_info_list[441]['awards'] = 7
-        scientist_info_list[486]['awards'] = 11
-        scientist_info_list[488]['awards'] = 5
-        scientist_info_list[501]['awards'] = 5
-        scientist_info_list[514]['awards'] = 3
-        scientist_info_list[516]['awards'] = 1
-        scientist_info_list[545]['awards'] = 10
-        scientist_info_list[577]['awards'] = 5
-        scientist_info_list[586]['awards'] = 4
-        scientist_info_list[607]['awards'] = 13
-        scientist_info_list[609]['awards'] = 8
-        scientist_info_list[636]['awards'] = 2
-        scientist_info_list[669]['awards'] = 1
+        # Setting the number of awards for some scientists, because we could not fetch the number from their wikipedia page with the web crawler
+        scientist_info_list[51]['awards'] = 12
+        scientist_info_list[59]['awards'] = 8
+        scientist_info_list[93]['awards'] = 7
+        scientist_info_list[147]['awards'] = 5
+        scientist_info_list[193]['awards'] = 9
+        scientist_info_list[240]['awards'] = 2
+        scientist_info_list[270]['awards'] = 7
+        scientist_info_list[288]['awards'] = 3
+        scientist_info_list[315]['awards'] = 6
+        scientist_info_list[372]['awards'] = 2
+        scientist_info_list[389]['awards'] = 3
+        scientist_info_list[395]['awards'] = 10
+        scientist_info_list[402]['awards'] = 7
+        scientist_info_list[424]['awards'] = 2
+        scientist_info_list[436]['awards'] = 1
+        scientist_info_list[443]['awards'] = 7
+        scientist_info_list[488]['awards'] = 11
+        scientist_info_list[490]['awards'] = 5
+        scientist_info_list[503]['awards'] = 5
+        scientist_info_list[516]['awards'] = 3
+        scientist_info_list[518]['awards'] = 1
+        scientist_info_list[547]['awards'] = 10
+        scientist_info_list[579]['awards'] = 5
+        scientist_info_list[588]['awards'] = 4
+        scientist_info_list[609]['awards'] = 13
+        scientist_info_list[611]['awards'] = 8
+        scientist_info_list[638]['awards'] = 2
+        scientist_info_list[671]['awards'] = 1
 
         # Saving scientist info to JSON file
         with open("scientist_info.json", "w", encoding='utf-8') as outfile:
