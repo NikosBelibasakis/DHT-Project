@@ -23,6 +23,7 @@ class Chord_Node:
         self.ID = ID
         self.successor = None
         self.predecessor = None
+        self.keys = {}
 
 
 
@@ -100,61 +101,55 @@ class Chord_Ring:
 # Main function
 if __name__ == '__main__':
 
-    # Get the data from the JSON file
+    #Fetch the data from the JSON file
     with open('scientist_info.json', 'r', encoding="utf-8") as file:
         data = json.load(file)
 
-    # fetch the surnames
-    surnames = [scientist['surname'] for scientist in data]
+    scientists = []
+
+    for item in data:
+        surname = item['surname']
+        awards = item['awards']
+        education = item['education']
+
+        #Check if the scientist has studied in more than one educational institutions
+        if ', ' in education:
+            education = education.split(', ')
+        else:
+            education = [education]
+
+        scientist = [surname, awards, education]
+        scientists.append(scientist)
 
 
-    # fetch the number of awards
-    awards = [scientist['awards'] for scientist in data]
-    awards_int = [int(aw) for aw in awards]
 
-    # fetch the education
-    education = [scientist['education'] for scientist in data]
-
-    counter = 0;  # counter used for the attributes insertion in the attributes_array.
-    attributes_array = []
-
-    for s in surnames:
-        temp_list = [surnames[counter], awards_int[counter], education[counter]]
-        attributes_array.append(temp_list)
-        counter = counter + 1
+    for s in scientists:
+        print(s)
 
 
-    # Example usage:
+
+
     chord_ring = Chord_Ring()
-    node1 = chord_ring.node_join(1)
-
-    node2 = chord_ring.node_join(3)
-
-    node3 = chord_ring.node_join(2)
-
-    node4 = chord_ring.node_join(4)
-
-    node5 = chord_ring.node_join(0)
 
 
 
-    chord_ring.print_chord_ring()
+    #Add 512 nodes in the chord ring
+    for i in range(512):
+        chord_ring.node_join(i)
 
-    print('\nNode leave (2)')
-    chord_ring.node_leave(2)
-    chord_ring.print_chord_ring()
 
-    print('\nNode leave (0)')
-    chord_ring.node_leave(0)
-    chord_ring.print_chord_ring()
+    #!!TEMP COMMENT!!
+   # print('Chord ring: ')
+   # chord_ring.print_chord_ring()
 
-    print('\nNode join (2)')
-    chord_ring.node_join(2)
-    chord_ring.print_chord_ring()
 
-    print('\nNode join (5)')
-    chord_ring.node_join(5)
-    chord_ring.print_chord_ring()
+
+
+
+
+
+
+
 
 
 
