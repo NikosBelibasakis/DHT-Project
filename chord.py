@@ -1,4 +1,4 @@
-#version 3
+#version 4
 
 import json
 import hashlib
@@ -13,6 +13,30 @@ def sha1_hash_function(input):
     hash_dec = int(hash_value, 16) >> (160 - 9)
     #By this way, the hash function returns decimal hash values between 0 and 511, which is what we want since we choose to have 512 identifiers
     return hash_dec
+
+
+
+#The function for the user's query
+def lookup_query():
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    # User query
+    print('Scientists lookup query')
+    input_ed = input('Please insert the educational institution: ')
+    input_aw = input('Please insert the number of awards threshold: ')
+    input_ed_hash = sha1_hash_function(input_ed)
+
+    #Start the lookup from a specific node
+    node = chord_ring.lookup(chord_ring.nodes[200], input_ed_hash)
+    returned_scientists = []
+    for scientist in node.keys_and_values:
+        if((scientist[2] == input_ed) and (scientist[1] > int(input_aw))):
+            returned_scientists.append(scientist)
+
+    print('Returned scientists: ')
+    for s in returned_scientists:
+        print(f'Surname: {s[0]}, Number of awards: {s[1]}, Education: {s[2]}')
+
+    print(f'Node returned: {node.ID} ')
 
 
 
@@ -123,12 +147,12 @@ class Chord_Ring:
         # Find the node where the key will be assigned to
 
         #Check if there is a node with the same identifier as the key
-        hash_value = scientist[2]
+        hash_value = scientist[3]
 
         #If there is, we assign the key and the value to that node
         if(hash_value in chord_ring.nodes):
             node = chord_ring.nodes[hash_value]
-            node.keys_and_values.append([scientist[0],scientist[1],hash_value])
+            node.keys_and_values.append([scientist[0],scientist[1],scientist[2],hash_value])
 
 
         #If there is not, we search the chord ring to find the key's successor
@@ -136,7 +160,7 @@ class Chord_Ring:
           if (hash_value > max(chord_ring.nodes.keys())):
               pos = min(chord_ring.nodes.keys())
               node = chord_ring.nodes[pos]
-              node.keys_and_values.append([scientist[0],scientist[1],hash_value])
+              node.keys_and_values.append([scientist[0],scientist[1],scientist[2],hash_value])
 
           else:
               keys = sorted(chord_ring.nodes.keys())
@@ -145,7 +169,7 @@ class Chord_Ring:
                       pos = k
                       break
               node = chord_ring.nodes[pos]
-              node.keys_and_values.append([scientist[0],scientist[1],hash_value])
+              node.keys_and_values.append([scientist[0],scientist[1],scientist[2],hash_value])
 
 
 
@@ -189,6 +213,48 @@ class Chord_Ring:
                         break
                 node = chord_ring.nodes[pos]
                 return node
+
+
+
+    #The function that executes the lookup operation
+    def lookup(self,node,val):
+
+        #Check if this node is the one we are looking for
+        if(node.ID == val):
+            return node
+
+        #If it is not, we keep on searching in the ring
+        else:
+            temp_list = []
+            for n in node.finger_table:
+                temp_list.append(n.ID)
+
+            temp_list.sort(reverse=True)
+
+            #Initialize the variable node_id with a value that is surely not a node ID
+            node_id = 999
+
+            for id in temp_list:
+                if (id <= val):
+                    node_id = id
+                    break
+
+            #If none of the finger table values is suitable
+            if(node_id == 999):
+                pos = min(chord_ring.nodes.keys())
+                node1 = chord_ring.nodes[pos]
+                returned_node = chord_ring.lookup(node1, val)
+                return returned_node
+
+
+            else:
+             node1 = chord_ring.nodes[node_id]
+             returned_node = chord_ring.lookup(node1,val)
+             return returned_node
+
+
+
+
 
 
 
@@ -248,10 +314,18 @@ if __name__ == '__main__':
     for s in scientists:
         for uni in s[2]:
             hash_value = sha1_hash_function(uni)
-            key_value = [s[0],s[1],hash_value]
+            key_value = [s[0],s[1],uni,hash_value]
             chord_ring.key_join(key_value)
 
     chord_ring.print_chord_ring()
+    lookup_query()
+
+
+
+
+
+
+
 
 
 
