@@ -1,5 +1,4 @@
-#version 4
-
+import threading
 import json
 import hashlib
 
@@ -17,30 +16,25 @@ def sha1_hash_function(input):
 
 
 #The function for the user's query
-def lookup_query():
-    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-    # User query
-    print('Scientists lookup query')
-    input_ed = input('Please insert the educational institution: ')
-    input_aw = input('Please insert the number of awards threshold: ')
+def lookup_query(query_id,input_ed,input_aw,node_for_lookup):
+
+    #Get the hash value for the given educational institution
     input_ed_hash = sha1_hash_function(input_ed)
 
+
     #Start the lookup from a specific node
-    node = chord_ring.lookup(chord_ring.nodes[200], input_ed_hash)
+    node = chord_ring.lookup(chord_ring.nodes[node_for_lookup], input_ed_hash)
+
     returned_scientists = []
     for scientist in node.keys_and_values:
         if((scientist[2] == input_ed) and (scientist[1] > int(input_aw))):
             returned_scientists.append(scientist)
-
-    print('Returned scientists: ')
+    print('---------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+    print(f'Returned scientists for query ({query_id}): ')
     for s in returned_scientists:
         print(f'Surname: {s[0]}, Number of awards: {s[1]}, Education: {s[2]}')
 
-    print(f'Node returned: {node.ID} ')
-
-
-
-
+    print(f'Data stored at node: {node.ID} ')
 
 # Constructor to create a new node for the chord ring
 class Chord_Node:
@@ -51,7 +45,6 @@ class Chord_Node:
         self.predecessor = None
         self.keys_and_values = []
         self.finger_table = []
-
 
 
 # Constructor to create the chord ring and add the nodes in it
@@ -78,7 +71,7 @@ class Chord_Ring:
         #The node checks its successor's keys and values to see if any of these should be assigned to it
         node_keys_and_values = []
         for obj in node.successor.keys_and_values:
-            if (obj[2] <= node.ID):
+            if (obj[3] <= node.ID):
                 node_keys_and_values.append(obj)
 
         node.keys_and_values = node_keys_and_values
@@ -136,9 +129,6 @@ class Chord_Ring:
             return self.nodes[node_IDs[-1]]
         # Otherwise, return the predecessor
         return self.nodes[node_IDs[index - 1]]
-
-
-
 
 
     # A function to insert a key in the chord ring
@@ -215,48 +205,49 @@ class Chord_Ring:
                 return node
 
 
-
     #The function that executes the lookup operation
     def lookup(self,node,val):
 
         #Check if this node is the one we are looking for
-        if(node.ID == val):
+        key_at_node = False
+        for obj in node.keys_and_values:
+               if (obj[3] == val):
+                key_at_node = True
+                break
+        if(key_at_node):
             return node
 
         #If it is not, we keep on searching in the ring
         else:
-            temp_list = []
-            for n in node.finger_table:
-                temp_list.append(n.ID)
 
-            temp_list.sort(reverse=True)
+        #We check if the key's id is between the node's id and its successor's id
+         if(node.ID < val <= node.successor.ID):
+             returned_node = chord_ring.lookup(node.successor,val)
+             return returned_node
 
-            #Initialize the variable node_id with a value that is surely not a node ID
-            node_id = 999
+        #If it isn't, we use the node's finger table to find the node that is the closest to the key ID in the ring
+         else:
+             finger_table_IDs = []
+             distance_values = []
+             for n in node.finger_table:
+                 finger_table_IDs.append(n.ID)
+                 distance = chord_ring.calculate_distance(n.ID,val)
+                 distance_values.append(distance)
+             #Find the node with the minimum distance from the key ID
+             idx = distance_values.index(min(distance_values))
+             node_with_min_distance = finger_table_IDs[idx]
 
-            for id in temp_list:
-                if (id <= val):
-                    node_id = id
-                    break
-
-            #If none of the finger table values is suitable
-            if(node_id == 999):
-                pos = min(chord_ring.nodes.keys())
-                node1 = chord_ring.nodes[pos]
-                returned_node = chord_ring.lookup(node1, val)
-                return returned_node
-
-
-            else:
-             node1 = chord_ring.nodes[node_id]
+             #Execute the lookup from that node
+             node1 = chord_ring.nodes[node_with_min_distance]
              returned_node = chord_ring.lookup(node1,val)
              return returned_node
 
 
 
-
-
-
+    #This function is used to calculate the distance between two nodes of the chord ring
+    def calculate_distance(self,node,key):
+        clockwise_distance = (key - node) if key >= node else (512 - (node - key))
+        return clockwise_distance
 
 
     def print_chord_ring(self):
@@ -267,12 +258,7 @@ class Chord_Ring:
             print(f'\nFinger table: ')
             for n in node.finger_table:
                 print(n.ID)
-            print('------------------------------------------------------------------------------------------------------------------------------------')
-
-
-
-
-
+            print('---------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
 
 # Main function
 if __name__ == '__main__':
@@ -297,58 +283,49 @@ if __name__ == '__main__':
         scientist = [surname, awards, education]
         scientists.append(scientist)
 
-
-
-
-
     chord_ring = Chord_Ring()
-
 
     #Add 512 nodes in the chord ring
     for i in range(512):
         chord_ring.node_join(i)
 
-
     # We get the hash value of each educational institution (education field) for every scientist, and we insert the information in the chord ring with a key-value format
-
     for s in scientists:
         for uni in s[2]:
             hash_value = sha1_hash_function(uni)
             key_value = [s[0],s[1],uni,hash_value]
             chord_ring.key_join(key_value)
 
+
     chord_ring.print_chord_ring()
-    lookup_query()
+
+    #We ask the user to set the number of queries that he/she wants to be executed simultaneously
+    num_of_queries = int(input("Give the number of queries that you want to make: "))
 
 
+    ed_array = []
+    aw_array = []
+    node_for_lookup_array = []
+
+    #Get the queries
+    for x in range(num_of_queries):
+     print('---------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+     print(f'Scientists lookup query ({x})')
+     input_ed = input('Please insert the educational institution: ')
+     input_aw = input('Please insert the number of awards threshold: ')
+     input_node_for_lookup = input('Please insert the node from which you want the lookup to start from: ')
+     ed_array.append(input_ed)
+     aw_array.append(input_aw)
+     node_for_lookup_array.append(input_node_for_lookup)
 
 
+    #Create the threads
+    threads = []
+    for i in range(num_of_queries):
+        thread = threading.Thread(target=lookup_query, args=(i,ed_array[i],aw_array[i],int(node_for_lookup_array[i])))
+        thread.start()
+        threads.append(thread)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    #Wait for the threads to finish their execution
+    for thread in threads:
+        thread.join()
