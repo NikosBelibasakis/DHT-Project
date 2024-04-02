@@ -1,0 +1,571 @@
+Υποερώτημα 1
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/agn_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT MONTH(Date) as Mhnas, AVG(Open) as Mesos_oros_anoigmatos, AVG(Close) as Mesos_oros_kleisimatos,  AVG(Volume) as Mesos_oros_ogkou_sunallagwn FROM stock_data GROUP BY MONTH(Date) ORDER BY MONTH(Date) ASC")
+
+# Print the result
+display(result_df)
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ainv_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT MONTH(Date) as Mhnas, AVG(Open) as Mesos_oros_anoigmatos, AVG(Close) as Mesos_oros_kleisimatos,  AVG(Volume) as Mesos_oros_ogkou_sunallagwn FROM stock_data GROUP BY MONTH(Date) ORDER BY MONTH(Date) ASC")
+
+# Print the result
+display(result_df)
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ale_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT MONTH(Date) as Mhnas, AVG(Open) as Mesos_oros_anoigmatos, AVG(Close) as Mesos_oros_kleisimatos,  AVG(Volume) as Mesos_oros_ogkou_sunallagwn FROM stock_data GROUP BY MONTH(Date) ORDER BY MONTH(Date) ASC")
+
+# Print the result
+display(result_df)
+
+
+
+
+Υποερώτημα 2
+
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/agn_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT COUNT(*) as Arithmos_Hmerwn FROM stock_data WHERE Open > 35")
+
+# Print the result
+display(result_df)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ainv_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT COUNT(*) as Arithmos_Hmerwn FROM stock_data WHERE Open > 35")
+
+# Print the result
+display(result_df)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ale_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT COUNT(*) as Arithmos_Hmerwn FROM stock_data WHERE Open > 35")
+
+# Print the result
+display(result_df)
+
+
+
+
+Υποερώτημα 3
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/agn_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Date as Meres, Open as Anoigma FROM stock_data ORDER BY Open DESC LIMIT 5")
+
+# Print the result
+display(result_df)
+
+
+
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/agn_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Date as Meres, Volume as Ogkos_sunallagwn FROM stock_data ORDER BY Volume DESC LIMIT 5")
+
+# Print the result
+display(result_df)
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ainv_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Date as Meres, Open as Anoigma FROM stock_data ORDER BY Open DESC LIMIT 5")
+
+# Print the result
+display(result_df)
+
+
+
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ainv_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Date as Meres, Volume as Ogkos_sunallagwn FROM stock_data ORDER BY Volume DESC LIMIT 5")
+
+# Print the result
+display(result_df)
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ale_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Date as Meres, Open as Anoigma FROM stock_data ORDER BY Open DESC LIMIT 5")
+
+# Print the result
+display(result_df)
+
+
+
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ale_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Date as Meres, Volume as Ogkos_sunallagwn FROM stock_data ORDER BY Volume DESC LIMIT 5")
+
+# Print the result
+display(result_df)
+
+
+
+
+
+
+Υποερώτημα 4
+
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/agn_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT YEAR(Date) as Xronia, Open as Anoigma FROM stock_data ORDER BY Open DESC LIMIT 1")
+
+# Print the result
+display(result_df)
+
+
+
+
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/agn_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT YEAR(Date) as Xronia, Close as Kleisimo FROM stock_data ORDER BY Close ASC LIMIT 1")
+
+# Print the result
+display(result_df)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ainv_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT YEAR(Date) as Xronia, Open as Anoigma FROM stock_data ORDER BY Open DESC LIMIT 1")
+
+# Print the result
+display(result_df)
+
+
+
+
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ainv_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT YEAR(Date) as Xronia, Close as Kleisimo FROM stock_data ORDER BY Close ASC LIMIT 1")
+
+# Print the result
+display(result_df)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ale_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT YEAR(Date) as Xronia, Open as Anoigma FROM stock_data ORDER BY Open DESC LIMIT 1")
+
+# Print the result
+display(result_df)
+
+
+
+
+
+#Determine the schema
+schema = "Date DATE, Open FLOAT, Hight FLOAT, Low FLOAT, Close FLOAT, Volume INT, OpenInt INT"
+
+# File location and type
+file_location = "/FileStore/tables/ale_us.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("stock_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT YEAR(Date) as Xronia, Close as Kleisimo FROM stock_data ORDER BY Close ASC LIMIT 1")
+
+# Print the result
+display(result_df)
+
+
+

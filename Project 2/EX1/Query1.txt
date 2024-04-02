@@ -13,7 +13,7 @@ infer_schema = "false"
 first_row_is_header = "true"
 delimiter = ","
 
-# Διαβάζετε το CSV αρχείο χρησιμοποιώντας το ορισμένο σχήμα
+# The applied options are for CSV files. For other file types, these will be ignored.
 df = spark.read.format(file_type) \
              .option("inferSchema", infer_schema) \
              .option("header", first_row_is_header) \
@@ -51,7 +51,7 @@ infer_schema = "false"
 first_row_is_header = "true"
 delimiter = ","
 
-# Διαβάζετε το CSV αρχείο χρησιμοποιώντας το ορισμένο σχήμα
+# The applied options are for CSV files. For other file types, these will be ignored.
 df = spark.read.format(file_type) \
              .option("inferSchema", infer_schema) \
              .option("header", first_row_is_header) \
@@ -90,7 +90,7 @@ infer_schema = "false"
 first_row_is_header = "true"
 delimiter = ","
 
-# Διαβάζετε το CSV αρχείο χρησιμοποιώντας το ορισμένο σχήμα
+# The applied options are for CSV files. For other file types, these will be ignored.
 df = spark.read.format(file_type) \
              .option("inferSchema", infer_schema) \
              .option("header", first_row_is_header) \
@@ -125,7 +125,7 @@ infer_schema = "false"
 first_row_is_header = "true"
 delimiter = ","
 
-# Διαβάζετε το CSV αρχείο χρησιμοποιώντας το ορισμένο σχήμα
+# The applied options are for CSV files. For other file types, these will be ignored.
 df = spark.read.format(file_type) \
              .option("inferSchema", infer_schema) \
              .option("header", first_row_is_header) \
@@ -162,7 +162,7 @@ infer_schema = "false"
 first_row_is_header = "true"
 delimiter = ","
 
-# Διαβάζετε το CSV αρχείο χρησιμοποιώντας το ορισμένο σχήμα
+# The applied options are for CSV files. For other file types, these will be ignored.
 df = spark.read.format(file_type) \
              .option("inferSchema", infer_schema) \
              .option("header", first_row_is_header) \
