@@ -1,0 +1,181 @@
+Υποερώτημα 1
+
+
+#Determine the schema
+schema = "ID INT, Date1 DATE, Temperature FLOAT, Humidity INT"
+
+# File location and type
+file_location = "/FileStore/tables/temp_hum.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# Διαβάζετε το CSV αρχείο χρησιμοποιώντας το ορισμένο σχήμα
+df = spark.read.format(file_type) \
+             .option("inferSchema", infer_schema) \
+             .option("header", first_row_is_header) \
+             .option("sep", delimiter) \
+             .schema(schema) \
+             .load(file_location)
+
+
+# Create a TempView
+df.createOrReplaceTempView("temp_hum_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT COUNT(DISTINCT Date1) AS Number_Of_Days FROM temp_hum_data WHERE Temperature >= 18 AND Temperature <= 22")
+
+# Print the result
+display(result_df)
+
+
+
+
+
+
+
+Υποερώτημα 2.1
+
+#Determine the schema
+schema = "ID INT, Date1 DATE, Temperature FLOAT, Humidity INT"
+
+# File location and type
+file_location = "/FileStore/tables/temp_hum.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# Διαβάζετε το CSV αρχείο χρησιμοποιώντας το ορισμένο σχήμα
+df = spark.read.format(file_type) \
+             .option("inferSchema", infer_schema) \
+             .option("header", first_row_is_header) \
+             .option("sep", delimiter) \
+             .schema(schema) \
+             .load(file_location)
+
+
+# Create a TempView
+df.createOrReplaceTempView("temp_hum_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Date1 AS Hmeromhnia, MIN(Temperature) AS Thermokrasia FROM temp_hum_data WHERE Temperature IS NOT NULL GROUP BY Date1 ORDER BY MIN(Temperature) ASC LIMIT 10;")
+
+# Print the result
+display(result_df)
+
+
+
+
+
+
+
+
+Υποερώτημα 2.2
+
+#Determine the schema
+schema = "ID INT, Date1 DATE, Temperature FLOAT, Humidity INT"
+
+# File location and type
+file_location = "/FileStore/tables/temp_hum.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# Διαβάζετε το CSV αρχείο χρησιμοποιώντας το ορισμένο σχήμα
+df = spark.read.format(file_type) \
+             .option("inferSchema", infer_schema) \
+             .option("header", first_row_is_header) \
+             .option("sep", delimiter) \
+             .schema(schema) \
+             .load(file_location)
+
+
+# Create a TempView
+df.createOrReplaceTempView("temp_hum_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Date1 AS Hmeromhnia, MAX(Temperature) AS Thermokrasia FROM temp_hum_data WHERE Temperature IS NOT NULL GROUP BY Date1 ORDER BY MAX(Temperature) DESC LIMIT 10;")
+
+# Print the result
+display(result_df)
+
+
+
+
+Υποερώτημα 3
+
+#Determine the schema
+schema = "ID INT, Date1 DATE, Temperature FLOAT, Humidity INT"
+
+# File location and type
+file_location = "/FileStore/tables/temp_hum.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# Διαβάζετε το CSV αρχείο χρησιμοποιώντας το ορισμένο σχήμα
+df = spark.read.format(file_type) \
+             .option("inferSchema", infer_schema) \
+             .option("header", first_row_is_header) \
+             .option("sep", delimiter) \
+             .schema(schema) \
+             .load(file_location)
+
+
+# Create a TempView
+df.createOrReplaceTempView("temp_hum_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT MONTH(Date1) AS Mhnas,  STDDEV_POP(Humidity) AS Typikh_apoklish FROM temp_hum_data GROUP BY MONTH(Date1) ORDER BY STDDEV_POP(Humidity) DESC LIMIT 1")
+
+# Print the result
+display(result_df)
+
+
+
+
+
+
+Υποερώτημα 4
+
+#Determine the schema
+schema = "ID INT, Date1 DATE, Temperature FLOAT, Humidity INT"
+
+# File location and type
+file_location = "/FileStore/tables/temp_hum.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# Διαβάζετε το CSV αρχείο χρησιμοποιώντας το ορισμένο σχήμα
+df = spark.read.format(file_type) \
+             .option("inferSchema", infer_schema) \
+             .option("header", first_row_is_header) \
+             .option("sep", delimiter) \
+             .schema(schema) \
+             .load(file_location)
+
+
+# Create a TempView
+df.createOrReplaceTempView("temp_hum_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT MAX(Temperature - 0.55*(1-0.01*Humidity)*(Temperature -14.5)) AS megisth_timh_deikth_dusforias, MIN(Temperature - 0.55*(1-0.01*Humidity)*(Temperature -14.5)) AS elaxisth_timh_deikth_dusforias  FROM temp_hum_data")
+
+# Print the result
+display(result_df)
