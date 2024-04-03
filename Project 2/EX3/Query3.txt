@@ -1,0 +1,139 @@
+Υποερώτημα 1
+
+#Determine the schema
+schema = "Country STRING, Year INT, Nights INT"
+
+# File location and type
+file_location = "/FileStore/tables/tour_occ_ninat_data-2.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .schema(schema) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("tourism_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Country as Xwra, AVG(Nights) as mesos_oros_dianuktereusewn FROM tourism_data WHERE Year >= 2007 AND Year <=2014 GROUP BY Country")
+
+# Print the result
+display(result_df)
+
+
+
+
+Υποερώτημα 2
+
+
+#Determine the schema
+schema = "Country STRING, Year INT, Nights INT"
+
+# File location and type
+file_location = "/FileStore/tables/tour_occ_ninat_data-2.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .schema(schema) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("tourism_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Country, Year, Nights FROM tourism_data WHERE Country = 'Greece' OR Country = 'Germany' OR Country = 'Netherlands' OR Country = 'Norway' OR Country = 'Iceland' OR Country = 'Czech Republic' ")
+
+result_df.createOrReplaceTempView("tourism_data2")
+
+result_df2= spark.sql("SELECT Year, MAX(Nights) as Dianuktereuseis FROM tourism_data2 GROUP BY Year")
+
+# Print the result
+display(result_df2)
+
+
+
+
+Υποερώτημα 3
+
+#Determine the schema
+schema = "Country STRING, Year INT, Nights INT"
+
+# File location and type
+file_location = "/FileStore/tables/tour_occ_ninat_data-2.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .schema(schema) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("tourism_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Country, Year, Nights FROM tourism_data WHERE Year = '2006' ORDER BY Nights DESC LIMIT 1")
+
+# Print the result
+display(result_df)
+
+
+
+
+
+Υποερώτημα 4
+
+#Determine the schema
+schema = "Country STRING, Year INT, Nights INT"
+
+# File location and type
+file_location = "/FileStore/tables/tour_occ_ninat_data-2.csv"
+file_type = "csv"
+
+# CSV options
+infer_schema = "false"
+first_row_is_header = "true"
+delimiter = ","
+
+# The applied options are for CSV files. For other file types, these will be ignored.
+df = spark.read.format(file_type) \
+  .option("inferSchema", infer_schema) \
+  .option("header", first_row_is_header) \
+  .option("sep", delimiter) \
+  .schema(schema) \
+  .load(file_location)
+
+# Create a TempView
+df.createOrReplaceTempView("tourism_data")
+
+#Write and execute the sql query
+result_df = spark.sql("SELECT Country, Year, Nights FROM tourism_data WHERE Year = '2006' AND Nights != 0 ORDER BY Nights ASC LIMIT 1")
+
+# Print the result
+display(result_df)
+
